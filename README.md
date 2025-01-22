@@ -120,3 +120,13 @@ You can find a working Postman collection for this API [here](https://www.postma
 - Feel free to reach out if you have any questions or need further clarification on the requirements.
 
 Good luck, and we look forward to reviewing your implementation!
+
+# Infinite and Smooth Scrolling Updates
+
+## Major Changes
+
+- Changed from useQuery to useInfiniteQuery
+- Added cursor support in API calls
+- Implemented intersection observer for pagination
+- Enhanced scroll event handling with complete GridOnScrollProps
+- Added proper TypeScript support for pagination
