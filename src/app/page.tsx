@@ -159,7 +159,7 @@ export default function Page() {
       ? watchedDateRange[1]
       : watchedDateRange[0]!.add(2, "month")
     ).format("YYYY-MM-DD"),
-  });
+  }); 
 
   // Update calendar dates and months when the date range changes
   useEffect(() => {
