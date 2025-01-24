@@ -121,12 +121,41 @@ You can find a working Postman collection for this API [here](https://www.postma
 
 Good luck, and we look forward to reviewing your implementation!
 
-# Infinite and Smooth Scrolling Updates
+# Calendar Infinite Scrolling & Performance Optimization
 
-## Major Changes
+## 1. Data Fetching Hook Changes
+### Before:
+- Used static `useQuery`
+- Loaded entire dataset at once
+- No pagination support
 
-- Changed from useQuery to useInfiniteQuery
-- Added cursor support in API calls
-- Implemented intersection observer for pagination
-- Enhanced scroll event handling with complete GridOnScrollProps
-- Added proper TypeScript support for pagination
+### After:
+- Implemented `useInfiniteQuery`
+- Added cursor-based pagination
+- Introduced `pageParam` for dynamic data loading
+- Added caching configuration:
+ * `gcTime`: 5 minutes
+ * `staleTime`: 1 minute
+
+## 2. Room Calendar Component Modifications
+### Ref Management:
+- Replaced `InventoryRefs` (array) with `inventoryRefsMap` (Map)
+- Added `useEffect` for dynamic ref handling
+- Implemented `useMemo` for efficient rendering
+
+## 3. Page Component Scroll Handling
+### Horizontal Scroll:
+- Created `handleCalenderScroll` for cross-section synchronization
+- Used `requestAnimationFrame` for smooth transitions
+- Implemented wheel event handler for responsive scrolling
+
+### Vertical Scroll:
+- Integrated Intersection Observer
+- Enabled progressive room category loading
+- Implemented `fetchNextPage` for dynamic content retrieval
+
+## 4. Technical Implementation Details
+- Cursor-based pagination
+- Dynamic data loading
+- Synchronized scroll across calendar sections
+- Efficient ref and state management
