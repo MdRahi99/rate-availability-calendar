@@ -9,7 +9,7 @@ import {
   GridChildComponentProps,
   GridOnScrollProps,
 } from "react-window";
-import { memo, RefObject, useMemo, useRef } from "react";
+import { memo, RefObject, useEffect, useMemo, useRef } from "react";
 import { styled } from "@mui/material/styles";
 import RoomRateCell from "./RateCell";
 import RoomRateRestrictionsCell from "./RestrictionsCell";
@@ -22,7 +22,9 @@ import { Person } from "@mui/icons-material";
 
 // Define the props for the RoomRateAvailabilityCalendar component
 interface IProps {
-  InventoryRefs: RefObject<Array<RefObject<VariableSizeGrid | null>>>;
+  inventoryRefsMap: React.MutableRefObject<
+    Map<string, RefObject<VariableSizeGrid | null>>
+  >;
   handleCalenderScroll: ({ scrollLeft }: GridOnScrollProps) => void;
   index: number;
   isLastElement: boolean;
@@ -46,7 +48,16 @@ export default function RoomRateAvailabilityCalendar(props: IProps) {
   const InventoryRef = useRef<VariableSizeGrid | null>(null);
 
   // Store the ref in the InventoryRefs array
-  props.InventoryRefs.current[props.index] = InventoryRef;
+  useEffect(() => {
+    props.inventoryRefsMap.current.set(
+      `room-${props.room_category.id}`,
+      InventoryRef
+    );
+
+    return () => {
+      props.inventoryRefsMap.current.delete(`room-${props.room_category.id}`);
+    };
+  }, [props.room_category.id, props.inventoryRefsMap]);
 
   // Memoize the grid data to avoid unnecessary re-renders
   const calendarGridData = useMemo(() => {

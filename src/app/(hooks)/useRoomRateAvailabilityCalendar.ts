@@ -78,7 +78,7 @@ export default function useRoomRateAvailabilityCalendar(params: IParams) {
     },
 
     // Get next page parameter from the API response
-    getNextPageParam: (lastPage) => lastPage.nextCursor,
+    getNextPageParam: (lastPage) => lastPage.data.nextCursor,
 
     // Initial page param
     initialPageParam: 0,
