@@ -159,3 +159,9 @@ Good luck, and we look forward to reviewing your implementation!
 - Dynamic data loading
 - Synchronized scroll across calendar sections
 - Efficient ref and state management
+
+## 5. Instructions for Future Developers
+### Known Performance Issue
+There is a current performance limitation in the horizontal date range scrolling:
+- Initial page load: Horizontal scrolling works smoothly
+- After loading additional room categories: Some lag may occur during horizontal scrolling
